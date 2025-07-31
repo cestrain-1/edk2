@@ -3,7 +3,7 @@ name: Build BaseTools for Linux
 on:
   workflow_dispatch:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
 
 jobs:
@@ -22,10 +22,10 @@ jobs:
 
     - name: Build BaseTools
       run: |
-        cd BaseTools/Source/C/TianoCompress
+        cd BaseTools
         make
 
-    - name: Archive Linux Bin Files
+    - name: Upload Linux Bin Files
       uses: actions/upload-artifact@v4
       with:
         name: bin-linux
