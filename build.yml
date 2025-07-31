@@ -22,7 +22,7 @@ jobs:
 
     - name: Build BaseTools
       run: |
-        cd BaseTools
+        cd BaseTools/Source/C/TianoCompress
         make
 
     - name: Archive Linux Bin Files
