@@ -1,11 +1,10 @@
-name: Build BaseTools
+name: Build BaseTools for Linux
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main, master ]
   pull_request:
-    branches: [ main, master ]
-  workflow_dispatch:
 
 jobs:
   build:
@@ -19,15 +18,15 @@ jobs:
     - name: Install build dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential uuid-dev iasl nasm python3
+        sudo apt-get install -y build-essential uuid-dev iasl nasm python3-pip
 
     - name: Build BaseTools
       run: |
         cd BaseTools
         make
 
-    - name: Archive BaseTools binaries
+    - name: Archive Linux Bin Files
       uses: actions/upload-artifact@v4
       with:
-        name: BaseTools-bin
-        path: BaseTools/BinWrappers/PosixLike/ # 或根据实际构建输出路径调整
+        name: bin-linux
+        path: BaseTools/Source/C/bin/
