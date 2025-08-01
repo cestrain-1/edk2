@@ -1,0 +1,35 @@
+name: Build TianoCompress
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  build-tianocompress:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential uuid-dev iasl nasm python3-pip
+
+    - name: Build TianoCompress
+      run: |
+        cd BaseTools/Source/C/TianoCompress
+        make
+
+    - name: List TianoCompress binary
+      run: ls -lh BaseTools/Source/C/TianoCompress/TianoCompress || true
+
+    - name: Upload TianoCompress binary
+      uses: actions/upload-artifact@v4
+      with:
+        name: TianoCompress
+        path: BaseTools/Source/C/TianoCompress/TianoCompress
