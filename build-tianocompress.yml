@@ -26,7 +26,7 @@ jobs:
         make
 
     - name: List TianoCompress binary
-      run: ls -lh BaseTools/Source/C/TianoCompress/TianoCompress || true
+      run: ls -lh BaseTools/Source/C/TianoCompress/
 
     - name: Upload TianoCompress binary
       uses: actions/upload-artifact@v4
